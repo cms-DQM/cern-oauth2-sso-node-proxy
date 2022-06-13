@@ -131,15 +131,6 @@ if (process.env.API_URL) {
 
 // Client requests
 app.all('*', isUserAuthenticated, (req, res) => {
-  if( process.env.enviroment == "dev" ){
-    var timestamp = '[' + Date.now() + '] ';
-    console.log( timestamp );
-    console.log( req.displayname );
-    console.log( req.email );
-    console.log( req.egroups );
-    console.log( req.id );
-  };
-
   proxy.on('proxyReq', (proxyReq, req, res, options) => {
     req.setTimeout(500000);
     res.setTimeout(500000);
@@ -149,6 +140,15 @@ app.all('*', isUserAuthenticated, (req, res) => {
       proxyReq.setHeader('egroups', user.egroups);
       proxyReq.setHeader('email', user.email);
       proxyReq.setHeader('id', user.id);
+      
+      if( process.env.enviroment == "dev" ){
+        var timestamp = '[' + (new Date()).toLocaleString() + '] ';
+        console.log( timestamp );
+        console.log( req.displayname );
+        console.log( req.email );
+        console.log( req.egroups );
+        console.log( req.id );
+      };
     }
   });
 
