@@ -134,10 +134,10 @@ app.all('*', isUserAuthenticated, (req, res) => {
   if( process.env.enviroment == "dev" ){
     var timestamp = '[' + Date.now() + '] ';
     console.log( timestamp );
-    console.log( user.displayname );
-    console.log( user.email );
-    console.log( user.egroups );
-    console.log( user.id );
+    console.log( req.displayname );
+    console.log( req.email );
+    console.log( req.egroups );
+    console.log( req.id );
   };
 
   proxy.on('proxyReq', (proxyReq, req, res, options) => {
@@ -145,10 +145,10 @@ app.all('*', isUserAuthenticated, (req, res) => {
     res.setTimeout(500000);
     const { user } = req;
     if (user) {
-      proxyReq.setHeader('displayname', req.displayname);
-      proxyReq.setHeader('egroups', req.egroups);
-      proxyReq.setHeader('email', req.email);
-      proxyReq.setHeader('id', req.id);
+      proxyReq.setHeader('displayname', user.displayname);
+      proxyReq.setHeader('egroups', user.egroups);
+      proxyReq.setHeader('email', user.email);
+      proxyReq.setHeader('id', user.id);
     }
   });
 
