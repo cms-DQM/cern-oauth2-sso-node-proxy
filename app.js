@@ -145,10 +145,10 @@ app.all('*', isUserAuthenticated, (req, res) => {
     res.setTimeout(500000);
     const { user } = req;
     if (user) {
-      proxyReq.setHeader('displayname', user.displayname);
-      proxyReq.setHeader('egroups', user.egroups);
-      proxyReq.setHeader('email', user.email);
-      proxyReq.setHeader('id', user.id);
+      proxyReq.setHeader('displayname', req.displayname);
+      proxyReq.setHeader('egroups', req.egroups);
+      proxyReq.setHeader('email', req.email);
+      proxyReq.setHeader('id', req.id);
     }
   });
 
