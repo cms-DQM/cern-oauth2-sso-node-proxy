@@ -144,10 +144,10 @@ app.all('*', isUserAuthenticated, (req, res) => {
       if( process.env.enviroment == "dev" ){
         var timestamp = '[' + (new Date()).toLocaleString() + '] ';
         console.log( timestamp );
-        console.log( req.displayname );
-        console.log( req.email );
-        console.log( req.egroups );
-        console.log( req.id );
+        console.log( user.displayname );
+        console.log( user.email );
+        console.log( user.egroups );
+        console.log( user.id );
       };
     }
   });
