@@ -146,8 +146,7 @@ app.all('*', isUserAuthenticated, (req, res) => {
     res.setTimeout(500000);
     const { user } = req;
     if (user) {
-      // user.egroups = clean_egroups( user.egroups );
-      user.egroups = user.egroups + user.egroups + user.egroups;
+      user.egroups = clean_egroups( user.egroups );
       
       proxyReq.setHeader('displayname', user.displayname);
       proxyReq.setHeader('egroups', user.egroups);
