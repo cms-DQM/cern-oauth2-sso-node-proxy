@@ -129,6 +129,16 @@ if (process.env.API_URL) {
   });
 }
 
+function clean_egroups( egroups ){
+  var egroups_answer = "";
+  all_egroups = egroups.split(';');
+  all_egroups.forEach( function (item, index) {
+    if( item.includes("dqm") ) egroups_answer += item + ";"
+  });
+  if( egroups_answer.length ) egroups_answer = egroups_answer.slice(0, -1)
+  return( egroups_answer )
+};
+
 // Client requests
 app.all('*', isUserAuthenticated, (req, res) => {
   proxy.on('proxyReq', (proxyReq, req, res, options) => {
@@ -136,6 +146,9 @@ app.all('*', isUserAuthenticated, (req, res) => {
     res.setTimeout(500000);
     const { user } = req;
     if (user) {
+      // user.egroups = clean_egroups( user.egroups );
+      user.egroups = user.egroups + user.egroups + user.egroups;
+      
       proxyReq.setHeader('displayname', user.displayname);
       proxyReq.setHeader('egroups', user.egroups);
       proxyReq.setHeader('email', user.email);
