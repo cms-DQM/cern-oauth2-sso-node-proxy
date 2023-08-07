@@ -100,22 +100,23 @@ Environment variables that configure the proxy's execution. You can set those ei
 
 13. You can edit the value `haproxy.router.openshift.io/timeout` key to match the timeout value of the server (see [env vars](#environment-variables)).  
 
-14. Go to the Project page on PaaS (e.g. https://paas.cern.ch/k8s/cluster/projects/dev-cmsrunregistry) and click the plus icon, top right:
+14. [Optional, seems to work correctly even without it] Add an `OidcReturnURI` Resource:
+    1. Go to the Project page on PaaS (e.g. https://paas.cern.ch/k8s/cluster/projects/dev-cmsrunregistry) and click the plus icon, top right:
     
-    ![](doc/create_paas_app_10.png)
+        ![](doc/create_paas_app_10.png)
 
-15. A text editor will open. Paste the following inside: 
-    ```yaml
-    apiVersion: webservices.cern.ch/v1alpha1
-    kind: OidcReturnURI
-    metadata:
-        name: dev-cmsrunregistry-return-uri
-    spec:
-        redirectURI: RETURN_URI
-    ```
-    Replace `RETURN_URI` with the complete redirect URI to the homepage of your application (e.g. `https://dev-cmsrunregistry.web.cern.ch`)
-16. Click `Create`.
-17. Note that the deployment is not yet ready to run.
+    2. A text editor will open. Paste the following inside: 
+        ```yaml
+        apiVersion: webservices.cern.ch/v1alpha1
+        kind: OidcReturnURI
+        metadata:
+            name: dev-cmsrunregistry-return-uri
+        spec:
+            redirectURI: RETURN_URI
+        ```
+        Replace `RETURN_URI` with the complete redirect URI to the homepage of your application (e.g. `https://dev-cmsrunregistry.web.cern.ch`)
+    3. Click `Create`.
+18. Note that the deployment is not yet ready to run.
 
 #### Create an SSO registration and mapping roles to e-groups
 
